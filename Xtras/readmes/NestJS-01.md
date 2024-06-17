@@ -17,6 +17,82 @@ Cada uno de estos niveles de abstracción desempeñan un papel crucial en la cre
 - Los módulos organizan el código en unidades lógicas
 - Los servicios permiten la construcción de sistemas mas complejos
 
+## Sistemas sin estado (stateless) y con estado (stateful)
+
+### Stateless (Sin Estado)
+
+Definición
+
+- Un sistema o componente sin estado no guarda información alguna sobre las interacciones anteriores.
+- Cada solicitud del cliente se trata de manera independiente y no tiene conocimiento del contexto o los datos de solicitudes previas.
+
+Características
+
+- Independencia de las Solicitudes: Cada solicitud se procesa de manera aislada, sin depender de ninguna otra.
+- Escalabilidad: Al no mantener estado, es más sencillo distribuir la carga entre múltiples servidores.
+- Facilidad de Implementación: Las operaciones sin estado son más fáciles de implementar y gestionar, ya que no hay necesidad de sincronizar estados entre servidores.
+
+Ejemplos
+
+- HTTP: Es un protocolo sin estado por diseño. Cada solicitud HTTP es independiente y no guarda información sobre solicitudes anteriores.
+- REST: Las API RESTful son, por convención, sin estado. Cada llamada a la API debe contener toda la información necesaria para procesar la solicitud.
+
+Ventajas
+
+- Escalabilidad: Es más fácil escalar aplicaciones sin estado, ya que no es necesario mantener coherencia de estado entre diferentes instancias del servicio.
+
+- Simplicidad: Menor complejidad en el manejo de sesiones y sincronización de estado.
+
+Desventajas
+
+- Redundancia: Puede haber redundancia de datos, ya que cada solicitud debe contener toda la información necesaria.
+- Rendimiento: La repetición de información en cada solicitud puede incrementar la carga y el tiempo de procesamiento.
+
+### Stateful (Con Estado)
+
+Definición
+
+- Un sistema o componente con estado guarda información sobre las interacciones anteriores.
+- Esto permite que las solicitudes subsecuentes del cliente se procesen teniendo en cuenta el contexto y el historial de interacciones.
+
+Características
+
+- Dependencia de las Solicitudes: Las solicitudes pueden depender de datos o contexto de interacciones anteriores.
+- Gestión de Sesiones: Necesita mecanismos para almacenar y gestionar el estado, como sesiones de usuario.
+- Complejidad: Mayor complejidad en la implementación y mantenimiento, especialmente en entornos distribuidos.
+
+Ejemplos
+
+- Sockets: Una conexión de socket mantiene el estado entre el cliente y el servidor, permitiendo comunicación continua y bidireccional.
+- Bases de Datos: Los sistemas de bases de datos transaccionales mantienen el estado de las transacciones para asegurar la consistencia y durabilidad de los datos.
+
+Ventajas
+
+- Contexto: Puede mantener contexto entre solicitudes, lo que es útil para aplicaciones que requieren seguimiento de estado, como aplicaciones de chat, juegos en línea, y comercio electrónico.
+- Eficiencia: Puede ser más eficiente en algunos casos, ya que no necesita repetir la misma información en cada solicitud.
+
+Desventajas
+
+- Escalabilidad: Más difícil de escalar, ya que se debe gestionar y sincronizar el estado entre múltiples instancias.
+- Complejidad: Mayor complejidad en el manejo de fallos, recuperación y consistencia del estado.
+
+### Comparación
+
+| Característica    | Stateless               | Stateful                     |
+| ----------------- | ----------------------- | ---------------------------- |
+| Dependencia       | Ninguna                 | Sí                           |
+| Escalabilidad     | Alta                    | Baja/Moderada                |
+| Gestión de Estado | No necesario            | Necesario                    |
+| Simplicidad       | Alta                    | Baja                         |
+| Uso Común         | HTTP, REST              | Sockets, Bases de Datos      |
+| Ejemplos          | API REST, Servicios Web | Aplicaciones de Chat, Juegos |
+
+### Conclusión
+
+> La elección entre una arquitectura sin estado y una con estado depende del tipo de aplicación y sus requisitos específicos. Las aplicaciones que requieren alta escalabilidad y simplicidad en la gestión de solicitudes suelen preferir una arquitectura sin estado. En cambio, las aplicaciones que necesitan mantener contexto y proporcionar interacciones continuas suelen optar por una arquitectura con estado.
+
+> Ambos enfoques tienen sus ventajas y desventajas, y a menudo se utilizan en combinación, dependiendo de las necesidades particulares del sistema o aplicación en desarrollo.
+
 ## Protocolos comunes en la interacción cliente-servidor
 
 ### TCP/IP (Transmission Control Protocol/Internet Protocol)
@@ -214,7 +290,15 @@ Ejemplo Práctico
   - **Necesidad de un diseño específico**. Necesita que la aplicación esté construida de modo que soporte escalabilidad vertical, lo que puede requerir modificaciones en el diseño original.
   - **Opción menos económica**. Aunque más potente y de mejor rendimiento, suele ser una opción menos económica, ya que requiere de varios servidores.
 
+<img src="./assets/01-01.png" alt="Escalabilidad">
+
 ## HOMEWORK
+
+### Habilidades y competencias que desarrollarás...
+
+Planeación y definición de la arquitectura de código.
+
+### ACTIVIDAD
 
 Crear y planificar el DER del proyecto a implementar tomando en cuenta la siguientes consideraciones. La aplicación consistirá en un e-commerce en el cual...
 
