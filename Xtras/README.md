@@ -3,7 +3,7 @@
 ## TypeScript
 
 - [TypeScript - Documentación Oficial](https://www.typescriptlang.org/)
-- [TypeScript](./readmes//TypeScript.md)
+- [TypeScript - Resumen](./readmes//TypeScript.md)
 
 ## Nest
 
