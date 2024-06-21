@@ -19,12 +19,16 @@ import { Request, Response } from 'express';
 import { User } from './users.repository';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { DateAdderInterceptor } from 'src/interceptors/date-adder.interceptor';
+import { UsersDbService } from './users-db.service';
 
 //* /users
 @Controller('users')
 //@UseGuards(AuthGuard)
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly usersDbService: UsersDbService
+  ) {}
 
   @Get()
   getUsers(@Query('name') name: string) {
@@ -81,7 +85,7 @@ export class UsersController {
   @UseInterceptors(DateAdderInterceptor)
   createUser(@Body() user: User, @Req() request: Request & { now: string }) {
     const modifiedUser = { ...user, createdAt: request.now }
-    return this.usersService.createUser(modifiedUser);
+    return this.usersDbService.create(modifiedUser);
   }
 
   @Put()

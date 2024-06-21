@@ -8,5 +8,6 @@ async function bootstrap() {
   app.use(LoggerGlobalMiddleware);
   // app.useGlobalGuards(new AuthGuard());
   await app.listen(3000);
+  console.log('Server listening on http://localhost:3000');
 }
 bootstrap();
