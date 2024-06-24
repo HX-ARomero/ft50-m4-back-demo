@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
@@ -7,6 +7,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { typeOrmConfig } from './config/typeorm';
+import { NotFoundMiddleware } from './middlewares/notfound.middleware';
 
 @Module({
   imports: [
@@ -31,4 +32,10 @@ import { typeOrmConfig } from './config/typeorm';
     AppService,
   ],
 })
-export class AppModule {}
+export class AppModule implements NestModule { 
+	configure(consumer: MiddlewareConsumer) { 
+		consumer
+			.apply(NotFoundMiddleware)
+			.forRoutes('*');
+	}
+}

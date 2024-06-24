@@ -11,4 +11,8 @@ export class UsersDbService {
   async create(user: any) {
     return await this.usersRepository.save(user);
   }
+
+  async getUserById(id: string) {
+    return await this.usersRepository.findOneBy({ id });
+  }
 }

@@ -5,7 +5,11 @@ import {
   Get,
   Headers,
   HttpCode,
+  HttpException,
+  HttpStatus,
+  NotFoundException,
   Param,
+  ParseUUIDPipe,
   Post,
   Put,
   Query,
@@ -20,6 +24,7 @@ import { User } from './users.repository';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { DateAdderInterceptor } from 'src/interceptors/date-adder.interceptor';
 import { UsersDbService } from './users-db.service';
+import { UserBodyDto } from './users.dto';
 
 //* /users
 @Controller('users')
@@ -27,7 +32,7 @@ import { UsersDbService } from './users-db.service';
 export class UsersController {
   constructor(
     private readonly usersService: UsersService,
-    private readonly usersDbService: UsersDbService
+    private readonly usersDbService: UsersDbService,
   ) {}
 
   @Get()
@@ -75,16 +80,24 @@ export class UsersController {
   // getUserById(@Param('id') id: string, @Param('name') name: string) {
   //   return `ID: ${id} - Usuario: ${name}`;
   // }
-  //* /users/1001
+  //* /users/uuid
   @Get(':id')
-  getUserById(@Param('id') id: string) {
-    return this.usersService.getUserById(Number(id));
+  async getUserById(@Param('id', ParseUUIDPipe) id: string) {
+    const foundUser = await this.usersDbService.getUserById(id);
+    // console.log(foundUser);
+    if (!foundUser) throw new NotFoundException('Usuario no encontrado...');
+    return foundUser;
   }
 
   @Post()
   @UseInterceptors(DateAdderInterceptor)
-  createUser(@Body() user: User, @Req() request: Request & { now: string }) {
-    const modifiedUser = { ...user, createdAt: request.now }
+  createUser(
+    @Body() user: UserBodyDto,
+    @Req() request: Request & { now: string },
+  ) {
+    console.log('Body: ', request.body);
+    console.log('user: ', user);
+    const modifiedUser = { ...user, createdAt: request.now };
     return this.usersDbService.create(modifiedUser);
   }
 
@@ -95,6 +108,17 @@ export class UsersController {
 
   @Delete()
   deleteUser() {
-    return 'Esta ruta elimina un usuario';
+    try {
+      throw new Error('ERROR NO Manejado!!!');
+    } catch (error) {
+      throw new HttpException(
+        {
+          status: HttpStatus.NOT_IMPLEMENTED, //* 501
+          error: 'Ruta No implementada',
+        },
+        HttpStatus.NOT_IMPLEMENTED, //* 501
+      );
+    }
+    // return 'Esta ruta elimina un usuario';
   }
 }
