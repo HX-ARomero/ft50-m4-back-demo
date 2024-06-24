@@ -2,6 +2,12 @@
 
 [Volver a Inicio](../README.md)
 
+## Links
+
+- [Class Validator - Documentación](https://www.npmjs.com/package/class-validator)
+- [Class Transformer - Documentación](https://www.npmjs.com/package/class-transformer)
+- [NestJS Exception-Filters](https://docs.nestjs.com/exception-filters)
+
 ## Guardianes, Interceptores y Pipes
 
 🎯En NestJS, los Guards, Interceptors y Pipes son tres conceptos clave que se utilizan para implementar la lógica de autorización, manipulación de datos y transformación de datos en una aplicación.
@@ -11,6 +17,12 @@
 3. **Pipes (Tuberías)**: Los Pipes se utilizan para transformar los datos que entran en una aplicación antes de ser procesados por un controlador. Pueden ser utilizados para validar, transformar o limpiar los datos de entrada antes de que sean procesados por la lógica de negocio. Los Pipes pueden ser sincrónicos o asincrónicos, y pueden ser utilizados para validar tipos de datos, realizar conversiones, entre otros.
 
 > En resumen, los Guardianes se utilizan para la autorización, los Interceptors para la manipulación de peticiones y respuestas, y los Pipes para la transformación o validación de datos antes de ser procesados por un controlador. Cada uno cumple una función específica en el flujo de una aplicación NestJS.
+
+## Instalación de Class-Validator y Class-Transformer
+
+```bash
+npm install class-validator class-transformer
+```
 
 ## Exception Filtars Preconstruídos
 
