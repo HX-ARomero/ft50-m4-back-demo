@@ -1,7 +1,5 @@
 # 20 Preguntas sobre lo visto en NestJS
-> Fundamentos, Routing e Integración con TypeORM
-
-> Este Archivo ya se encuentra Pusheado en Nuestro Repo...
+> Fundamentos, Routing e Integración con TypeORM. Este Archivo ya se encuentra Pusheado en Nuestro Repo (Trivia-04.md, en carpeta Xtras)...
 
 ## 01- ¿Qué función desempeña el decorador @Module() en un módulo de NestJS?
 
@@ -30,7 +28,7 @@ Opción: C
 - A) @Inject()
 - B) @Service()
 - C) @Injectable()
-- D) @Inject()
+- D) @Controller()
 <details>
   <summary>Respuesta correcta...</summary>
 Opción: A

@@ -7,7 +7,6 @@ import { AuthGuard } from './guards/auth.guard';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { typeOrmConfig } from './config/typeorm';
-import { NotFoundMiddleware } from './middlewares/notfound.middleware';
 
 @Module({
   imports: [
@@ -20,7 +19,7 @@ import { NotFoundMiddleware } from './middlewares/notfound.middleware';
       useFactory: (configService: ConfigService) =>
         configService.get('typeorm'),
     }),
-    UsersModule, 
+    UsersModule,
     TodosModule,
   ],
   controllers: [AppController],
@@ -32,10 +31,4 @@ import { NotFoundMiddleware } from './middlewares/notfound.middleware';
     AppService,
   ],
 })
-export class AppModule implements NestModule { 
-	configure(consumer: MiddlewareConsumer) { 
-		consumer
-			.apply(NotFoundMiddleware)
-			.forRoutes('*');
-	}
-}
+export class AppModule {}

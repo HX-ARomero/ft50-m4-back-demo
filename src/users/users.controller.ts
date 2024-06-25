@@ -2,21 +2,26 @@ import {
   Body,
   Controller,
   Delete,
+  FileTypeValidator,
   Get,
   Headers,
   HttpCode,
   HttpException,
   HttpStatus,
+  MaxFileSizeValidator,
   NotFoundException,
   Param,
+  ParseFilePipe,
   ParseUUIDPipe,
   Post,
   Put,
   Query,
   Req,
   Res,
+  UploadedFile,
   UseGuards,
   UseInterceptors,
+  UsePipes,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { Request, Response } from 'express';
@@ -25,6 +30,9 @@ import { AuthGuard } from 'src/guards/auth.guard';
 import { DateAdderInterceptor } from 'src/interceptors/date-adder.interceptor';
 import { UsersDbService } from './users-db.service';
 import { UserBodyDto } from './users.dto';
+import { CloudinaryService } from './cloudinary.service';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { MinSizeValidatorPipe } from './minSizeValidator.pipe';
 
 //* /users
 @Controller('users')
@@ -33,6 +41,7 @@ export class UsersController {
   constructor(
     private readonly usersService: UsersService,
     private readonly usersDbService: UsersDbService,
+    private readonly cloudinaryService: CloudinaryService,
   ) {}
 
   @Get()
@@ -99,6 +108,28 @@ export class UsersController {
     console.log('user: ', user);
     const modifiedUser = { ...user, createdAt: request.now };
     return this.usersDbService.create(modifiedUser);
+  }
+
+  @Post('profile/images')
+  @UseInterceptors(FileInterceptor('image'))
+  @UsePipes(MinSizeValidatorPipe)
+  uploadProfilePic(
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          new FileTypeValidator({
+            fileType: /(jpg|jpeg|png|webp)/,
+          }),
+          new MaxFileSizeValidator({
+            maxSize: 100000,
+            message: 'El archivo debe ser menor a 100kb',
+          }),
+        ],
+      }),
+    )
+    file: Express.Multer.File,
+  ) {
+    return this.cloudinaryService.uploadImage(file);
   }
 
   @Put()

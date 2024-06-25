@@ -6,6 +6,8 @@ import { UsersRepository } from './users.repository';
 import { UsersDbService } from './users-db.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users.entity';
+import { CloudinaryConfig } from 'src/config/cloudinary';
+import { CloudinaryService } from './cloudinary.service';
 
 //* Servicio Falso
 const usersMockService = {
@@ -47,6 +49,8 @@ const usersMockService = {
       },
     },
     UsersDbService,
+    CloudinaryConfig,
+    CloudinaryService,
   ],
 })
 export class UsersModule {
