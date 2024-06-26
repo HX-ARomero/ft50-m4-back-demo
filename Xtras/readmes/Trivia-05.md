@@ -1,4 +1,5 @@
 # Preguntas de Múltiple Choice sobre Pipes en NestJS
+> Estos archivos ya se encuentran pusheados en nuestro repo...
 
 ## 1- ¿Qué es un Pipe en NestJS?
 

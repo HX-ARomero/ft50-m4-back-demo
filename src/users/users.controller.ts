@@ -33,6 +33,7 @@ import { UserBodyDto } from './users.dto';
 import { CloudinaryService } from './cloudinary.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { MinSizeValidatorPipe } from './minSizeValidator.pipe';
+import { AuthService } from './auth.service';
 
 //* /users
 @Controller('users')
@@ -42,6 +43,7 @@ export class UsersController {
     private readonly usersService: UsersService,
     private readonly usersDbService: UsersDbService,
     private readonly cloudinaryService: CloudinaryService,
+    private readonly authService: AuthService,
   ) {}
 
   @Get()
@@ -62,6 +64,7 @@ export class UsersController {
 
   //* /users/profile/images
   @Get('profile/images')
+  @UseGuards(AuthGuard)
   getImages() {
     return 'Imágenes del perfil de usario';
   }
@@ -98,16 +101,21 @@ export class UsersController {
     return foundUser;
   }
 
-  @Post()
+  @Post('signup')
   @UseInterceptors(DateAdderInterceptor)
   createUser(
     @Body() user: UserBodyDto,
     @Req() request: Request & { now: string },
   ) {
-    console.log('Body: ', request.body);
-    console.log('user: ', user);
+
     const modifiedUser = { ...user, createdAt: request.now };
-    return this.usersDbService.create(modifiedUser);
+
+    return this.authService.signUp(modifiedUser);
+  }
+
+  @Post('signin')
+  async signIn(@Body() user: any) {
+    return this.authService.signIn(user.email, user.password);
   }
 
   @Post('profile/images')
