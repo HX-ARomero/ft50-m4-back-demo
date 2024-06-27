@@ -34,6 +34,9 @@ import { CloudinaryService } from './cloudinary.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { MinSizeValidatorPipe } from './minSizeValidator.pipe';
 import { AuthService } from './auth.service';
+import { Roles } from 'src/decorators/roles.decorator';
+import { Role } from 'src/role.enum';
+import { RolesGuard } from 'src/guards/roles.guard';
 
 //* /users
 @Controller('users')
@@ -52,6 +55,13 @@ export class UsersController {
       return this.usersService.getUserByName(name);
     }
     return this.usersService.getUsers();
+  }
+
+  @Get('dashboard')
+  @Roles(Role.Admin)
+  @UseGuards(AuthGuard, RolesGuard)
+  getAdmin() {
+    return 'Este es el Panel de Administrador';
   }
 
   //* /users/profile
@@ -107,7 +117,6 @@ export class UsersController {
     @Body() user: UserBodyDto,
     @Req() request: Request & { now: string },
   ) {
-
     const modifiedUser = { ...user, createdAt: request.now };
 
     return this.authService.signUp(modifiedUser);

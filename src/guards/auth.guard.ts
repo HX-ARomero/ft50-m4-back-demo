@@ -7,6 +7,7 @@ import {
 import { Request } from 'express';
 import { Observable } from 'rxjs';
 import { JwtService } from '@nestjs/jwt';
+import { Role } from 'src/role.enum';
 
 // function validateRequest(request: Request) {
 //   //* Obtener el Token:
@@ -36,12 +37,14 @@ export class AuthGuard implements CanActivate {
       payload.iat = new Date(payload.iat * 1000); //* issued at
       payload.exp = new Date(payload.exp * 1000); //* expira en...
 
-      payload.roles = ['admin', 'tester'];
-      payload.isAdmin = true;
+      //* El lo saco desde BBDD
+      payload.roles = [Role.Admin];
+      // payload.roles = [Role.User];
 
-      console.log("payload: ", payload);
+      request.user = payload;
 
       return true;
+
     } catch (error) {
       throw new UnauthorizedException('Token inválido');
     }
