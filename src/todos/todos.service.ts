@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { TodosRepository } from './todos.repository';
-import { LogMethod } from 'src/decorators/logMethod.decorator';
+//import { LogMethod } from 'src/decorators/logMethod.decorator';
 import { File } from './files.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -13,7 +13,7 @@ export class TodosService {
     @InjectRepository(File) private readonly fileRepository: Repository<File>,
   ) {}
 
-  @LogMethod()
+  // @LogMethod()
   getTodos() {
     return this.accessToken === 'ClaveSecreta'
       ? this.todosRepository.getTodos()

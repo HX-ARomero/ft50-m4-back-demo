@@ -14,5 +14,5 @@ export class Todo {
   description: string;
 
   @Column()
-  completed: string;
+  isCompleted: boolean;
 }

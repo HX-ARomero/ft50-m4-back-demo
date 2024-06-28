@@ -26,17 +26,17 @@ import {
 import { UsersService } from './users.service';
 import { Request, Response } from 'express';
 import { User } from './users.repository';
-import { AuthGuard } from 'src/guards/auth.guard';
-import { DateAdderInterceptor } from 'src/interceptors/date-adder.interceptor';
+import { AuthGuard } from '../guards/auth.guard';
+import { DateAdderInterceptor } from '../interceptors/date-adder.interceptor';
 import { UsersDbService } from './users-db.service';
 import { UserBodyDto } from './users.dto';
 import { CloudinaryService } from './cloudinary.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { MinSizeValidatorPipe } from './minSizeValidator.pipe';
 import { AuthService } from './auth.service';
-import { Roles } from 'src/decorators/roles.decorator';
-import { Role } from 'src/role.enum';
-import { RolesGuard } from 'src/guards/roles.guard';
+import { Roles } from '../decorators/roles.decorator';
+import { Role } from '../role.enum';
+import { RolesGuard } from '../guards/roles.guard';
 
 //* /users
 @Controller('users')

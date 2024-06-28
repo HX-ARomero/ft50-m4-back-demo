@@ -19,12 +19,12 @@ export class AuthService {
     if (!hashedPassword)
       throw new BadRequestException('Error al hashear contraseña');
 
-    await this.userService.create({
+    const newUser = await this.userService.create({
       ...user,
       password: hashedPassword,
     });
 
-    return 'Usuario creado con éxito';
+    return newUser;
   }
 
   async signIn(email: string, password: string) {
@@ -43,6 +43,6 @@ export class AuthService {
     };
     const token = this.jwtService.sign(userPayload);
 
-    return { message: 'Usuario Logueaddo', token };
+    return { message: 'Usuario Logueado', token };
   }
 }

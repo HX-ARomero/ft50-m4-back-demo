@@ -7,7 +7,7 @@ import {
 import { Request } from 'express';
 import { Observable } from 'rxjs';
 import { JwtService } from '@nestjs/jwt';
-import { Role } from 'src/role.enum';
+import { Role } from '../role.enum';
 
 // function validateRequest(request: Request) {
 //   //* Obtener el Token:

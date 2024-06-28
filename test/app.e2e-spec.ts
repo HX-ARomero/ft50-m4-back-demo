@@ -21,4 +21,12 @@ describe('AppController (e2e)', () => {
       .expect(200)
       .expect('Hello World!');
   });
+
+  it('GET /users/ retorna un array de usuarios y código de status 200', async () => {
+		// Utiliza supertest:
+		const req = await request(app.getHttpServer()).get('/users/');
+		// console.log(req.body);
+		expect(req.status).toBe(200);
+		expect(req.body).toBeInstanceOf(Array);
+	});
 });
