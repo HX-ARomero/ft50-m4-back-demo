@@ -1,5 +1,7 @@
 # TRIVIAS
 
+[Volver a Inicio](../README.md)
+
 ## 1- ¿Qué devuelve la siguiente función?
 
 ```js

@@ -1,5 +1,7 @@
 # Buenas Prácticas en JavaScript
 
+[Volver a Inicio](../README.md)
+
 ## Usar const y let en lugar de var
 
 > Ayuda a evitar problemas de hoisting y mantiene el alcance de las variables más predecible.

@@ -9,11 +9,21 @@
 
 - [Nest JS - Documentación Oficial](https://nestjs.com/)
 
+## Varios
+
+- [Buenas prácticas](./readmes/GoodPrac-01.md)
+- [Visual Studio Code - Atajos](./readmes/vsc-01.md)
+- [Trivia-01](./readmes/Trivia-01.md)
+- [Trivia-02](./readmes/Trivia-02.md)
+- [Trivia-03](./readmes/Trivia-03.md)
+- [Trivia-04](./readmes/Trivia-04.md)
+- [Trivia-05](./readmes/Trivia-05.md)
+- [Trivia-06](./readmes/Trivia-06.md)
+- [Trivia-07](./readmes/Trivia-07.md)
 
 ## 01 - Backend Architecture
 
 - [Link al resumen de la Clase](./readmes/NestJS-01.md)
-
 
 ## 02 - Nest JS Fundamentals I
 

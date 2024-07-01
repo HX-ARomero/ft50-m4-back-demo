@@ -1,13 +1,24 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { LoggerGlobalMiddleware } from './middlewares/logger.middleware';
-import { AuthGuard } from './guards/auth.guard';
 import { BadRequestException, ValidationPipe } from '@nestjs/common';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  //* Configuración
+  const swaggerConfig = new DocumentBuilder()
+    .setTitle('NestJS Demo - FT50')
+    .setDescription('Demo M4-Backend / API construída con NestJS')
+    .setVersion('1.0.0')
+    .addBearerAuth()
+    .build()
+  //* Le indicamos a Swagger quién es nuestro Servidor
+  const document = SwaggerModule.createDocument(app, swaggerConfig);
+  SwaggerModule.setup('api', app, document);
+
   app.use(LoggerGlobalMiddleware);
-  // app.useGlobalGuards(new AuthGuard());
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,

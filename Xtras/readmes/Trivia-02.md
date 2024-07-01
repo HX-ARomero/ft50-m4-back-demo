@@ -1,5 +1,7 @@
 # TRIVIAS
 
+[Volver a Inicio](../README.md)
+
 ## ¿Cuáles son los resultados de los console.log?
 
 ```js

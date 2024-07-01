@@ -1,5 +1,7 @@
 # TRIVIAS
 
+[Volver a Inicio](../README.md)
+
 ## 1- ¿Cuál de las siguientes características fue introducida en ECMAScript 6 (ES6)?
 
 - A. Prototipos
