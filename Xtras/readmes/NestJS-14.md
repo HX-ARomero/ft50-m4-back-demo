@@ -22,6 +22,10 @@
   8. [Edabit](https://edabit.com/): Proporciona una gran cantidad de desafíos de codificación en JavaScript y otros lenguajes.
   9. [Ejercicios de JavaScript para Navidad 🎄](https://adventjs.dev/es): Un ejercicio de JavaScript para cada día de Diciembre.
 
+## FUNCIONES PURAS
+
+<img src="./assets/nest-14-01.png" alt="Funciones Puras">
+
 ## ERRORES Y EXCEPCIONES
 
 > En el contexto de la programación, los términos "error" y "excepción" a menudo se usan indistintamente, pero técnicamente tienen diferencias sutiles, especialmente en lenguajes con manejo de excepciones como JavaScript, Java, C++, etc.
